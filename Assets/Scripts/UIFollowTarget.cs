@@ -1,19 +1,23 @@
+// using System.Diagnostics;
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 
 public class UIFollowTarget : MonoBehaviour 
 {
-	RectTransform rectTransform = null;
-	[SerializeField] Transform target = null;
+	RectTransform rectTransform;
+	[SerializeField] Transform target;
+	[SerializeField] Camera camera;
 
 	void Awake()
 	{
 		rectTransform = GetComponent<RectTransform> ();
+
 	}
 
-	void Update()
+	void LateUpdate()
 	{
-		rectTransform.position = RectTransformUtility.WorldToScreenPoint (Camera.main, target.position);
+		var targetScreenPos = camera.WorldToScreenPoint (target.position);
+		rectTransform.position = targetScreenPos;
 	}
 }
