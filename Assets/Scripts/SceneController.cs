@@ -8,14 +8,11 @@ public class SceneController : MonoBehaviour
     public void OnClickGameStartButton(string level)
     {
         switch(level){
-            case "Easy":
+            case "Game Start":
                 SceneManager.LoadScene("MainScene");
                 break;
-            case "Hard":
-                SceneManager.LoadScene("MainScene");
-                break;
-            case "MOCCHAN":
-                SceneManager.LoadScene("MainScene");
+            case "Rule":
+                SceneManager.LoadScene("RuleScene");
                 break;
             case "title":
                 SceneManager.LoadScene("TitleScene");

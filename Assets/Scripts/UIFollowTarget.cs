@@ -2,22 +2,37 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIFollowTarget : MonoBehaviour 
 {
-	RectTransform rectTransform;
-	[SerializeField] Transform target;
-	[SerializeField] Camera camera;
+	private RectTransform rectTransform;
+	private TextMeshProUGUI playerName;
+	public GameObject target;
+	[SerializeField] public Camera camera;
 
 	void Awake()
 	{
-		rectTransform = GetComponent<RectTransform> ();
+		if(target == null){
+            target = GameObject.Find("Stage");                               //ターゲットが存在しな時はステージに追従
+        }
 
+		rectTransform = GetComponent<RectTransform>();
+		playerName = GetComponent<TextMeshProUGUI>();
+		// UnityEngine.Debug.Log("UI_Awake:" + target.name);
+		playerName.text = target.name;
 	}
 
 	void LateUpdate()
 	{
-		var targetScreenPos = camera.WorldToScreenPoint (target.position);
+		if(target == null){
+            target = GameObject.Find("Stage");                               //ターゲットが存在しな時はステージに追従
+        }
+		playerName.text = target.name;
+		// UnityEngine.Debug.Log("UI_Update:" + target.name);
+
+		var targetScreenPos = camera.WorldToScreenPoint (target.transform.position);
+
 		rectTransform.position = targetScreenPos;
 	}
 }
